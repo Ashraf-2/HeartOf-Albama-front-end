@@ -13,6 +13,7 @@ import FoodRequest from './Pages/FoodRequest/FoodRequest';
 import AddFood from './Pages/AddFood/AddFood';
 import Login from './Pages/LoginPage/Login';
 import SignUp from './Pages/SignUpPage/SignUp';
+import AuthProvider from './Auth/AuthProvider';
 
 
 const router = createBrowserRouter([
@@ -55,8 +56,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
 
   </React.StrictMode>,
 )

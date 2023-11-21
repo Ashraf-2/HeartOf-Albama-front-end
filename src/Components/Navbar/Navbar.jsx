@@ -1,5 +1,15 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../Auth/AuthProvider";
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleSignOut=() => {
+        logOut()
+        .then(res => console.log('log out successfull'))
+        .catch(error => console.log(error))
+    }
+
     const navlinks = <>
         <li> <NavLink to="/">Home</NavLink> </li>
         <li> <NavLink to="/availabeFood">Available Food</NavLink> </li>
@@ -29,7 +39,40 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to="/login" className="btn">Log In</Link>
+                {
+                    user ?
+                        <div>
+                            <div className="dropdown dropdown-end">
+                                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                        <div className="w-10 rounded-full ">
+                                            <img src={user.photoURL?user.photoURL : "no pic"} />
+                                            {/* <p>{user.photoURL}</p> */}
+                                        </div>
+                                    </label>
+                                    <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52 dark:bg-slate-700 dark:text-white">
+                                        <li>
+                                            <a className="justify-between">
+                                                {user.displayName ? user.displayName : "null"}
+                                                <span className="badge">New</span>
+                                            </a>
+                                        </li>
+                                        <li><a>{user.email? user.email: "null"}</a></li>
+                                        <li><a href="/" onClick={handleSignOut}><button>Logout</button></a></li>
+                                    </ul>
+                                </div>
+                        </div>
+                        :
+                        <div>
+                            <Link to="/login">
+                                <button className="btn">Log In</button>
+                            </Link>
+                            <Link to="/signup">
+                                <button className="btn">Sing Up</button>
+                            </Link>
+                        </div>
+                }
+
+
             </div>
         </div>
     );
