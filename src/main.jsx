@@ -14,12 +14,14 @@ import AddFood from './Pages/AddFood/AddFood';
 import Login from './Pages/LoginPage/Login';
 import SignUp from './Pages/SignUpPage/SignUp';
 import AuthProvider from './Auth/AuthProvider';
+import ErrorPage from './Pages/ErrorPage/ErrorPage';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
