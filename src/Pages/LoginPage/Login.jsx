@@ -5,9 +5,11 @@ import { AuthContext } from "../../Auth/AuthProvider";
 import swal from "sweetalert";
 
 const Login = () => {
-    const {googleSignIn} = useContext(AuthContext);
+    const { googleSignIn, logInwithEmailPass } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
+    console.log("location: ", location);
+    console.log("navigate: ",navigate);
     const [loginError, setloginError] = useState("");
     const handleLogin = e => {
         e.preventDefault();
@@ -33,7 +35,17 @@ const Login = () => {
             return;
         }
 
-        //sign in with email and password
+        //log in with email and password
+        logInwithEmailPass(email, password)
+            .then(result => {
+                console.log(result.user);
+                swal("Good job!", "Logged in successfully!", "success");
+                navigate(location?.state ? location.state : '/');
+            })
+            .catch(error => {
+                console.error(error);
+                setloginError(error.message)
+            });
     }
 
     const handleGoogleSignIn = () => {
@@ -53,6 +65,11 @@ const Login = () => {
                 <div className="text-center lg:text-left">
                     <h1 className="text-5xl font-bold">Login now!</h1>
                     {/* <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p> */}
+                    <div>
+                        {
+                            loginError && <p className="my-2 text-red-600 font-medium">{loginError}</p>
+                        }
+                    </div>
                 </div>
                 <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <form onSubmit={handleLogin} className="card-body">
@@ -67,7 +84,7 @@ const Login = () => {
                                 <span className="label-text">Password</span>
                             </label>
                             <input type="password" name="password" placeholder="password" className="input input-bordered" required />
-                            
+
                         </div>
                         <div>
                             <Link to="/signUp">Do not have account? Here <span className="font-bold">Sign Up</span> </Link>

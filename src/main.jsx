@@ -15,6 +15,7 @@ import Login from './Pages/LoginPage/Login';
 import SignUp from './Pages/SignUpPage/SignUp';
 import AuthProvider from './Auth/AuthProvider';
 import ErrorPage from './Pages/ErrorPage/ErrorPage';
+import PrivateRoutes from './Components/PrivateRoute/PrivateRoutes';
 
 
 const router = createBrowserRouter([
@@ -29,11 +30,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/addFood",
-        element: <AddFood></AddFood>
+        element: <PrivateRoutes><AddFood></AddFood></PrivateRoutes> 
       },
       {
         path: "/manageFoods",
-        element: <ManageFood></ManageFood>
+        element: <PrivateRoutes><ManageFood></ManageFood></PrivateRoutes>
       },
       {
         path: "/availabeFood",
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/foodRequest",
-        element: <FoodRequest></FoodRequest>
+        element: <PrivateRoutes><FoodRequest></FoodRequest></PrivateRoutes>
       },
       {
         path: "/login",

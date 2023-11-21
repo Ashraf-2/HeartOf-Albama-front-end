@@ -4,7 +4,7 @@ import { AuthContext } from "../../Auth/AuthProvider";
 import swal from "sweetalert";
 
 const SignUp = () => {
-    const {signInWithEP,updateUser} = useContext(AuthContext);
+    const {signUpwithEmailPass,updateUser} = useContext(AuthContext);
     const [registerError, setRegisterError] = useState("");
     const location = useLocation();
     const navigate = useNavigate();
@@ -37,7 +37,7 @@ const SignUp = () => {
         }
 
         //create user
-        signInWithEP(email, password)
+        signUpwithEmailPass(email, password)
         .then(res => {
             console.log(res.user);
             updateUser(name,photo_url) 
@@ -62,6 +62,11 @@ const SignUp = () => {
                 <div className="text-center lg:text-left">
                     <h1 className="text-5xl font-bold">Sign Up now!</h1>
                     {/* <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p> */}
+                    <div>
+                        {
+                            registerError && <p className="my-2 text-red-600 font-medium">{registerError}</p>
+                        }
+                    </div>
                 </div>
                 <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <form onSubmit={handleSignUp} className="card-body">
