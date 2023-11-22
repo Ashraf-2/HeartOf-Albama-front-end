@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Auth/AuthProvider";
+import axios from "axios";
 
 const AddFood = () => {
     const {user} = useContext(AuthContext);
@@ -18,6 +19,27 @@ const AddFood = () => {
         const expire_date = form.expire_date.value;
         const notes = form.notes.value;
         console.log(food_img,food_name,food_status,donator_name,donator_email,donator_photo,food_quantity,pickup_location,expire_date,notes);
+
+        const newFood = {
+            food_img,food_name,food_status,donator_name,donator_email,donator_photo,food_quantity,pickup_location,expire_date,notes
+        }
+        console.log("newFood: ", newFood);
+
+        //post data to server using axios 
+        axios.post('http://localhost:5000/availableFoods',{
+            food_img,
+            food_name,
+            food_status,
+            donator_name,
+            donator_email,
+            donator_photo,
+            food_quantity,
+            pickup_location,
+            expire_date,
+            notes
+        })
+        .then(res=> console.log("your data successfully posted to server"))
+        .catch(error => console.log(error))
     }
     return (
         <div>
