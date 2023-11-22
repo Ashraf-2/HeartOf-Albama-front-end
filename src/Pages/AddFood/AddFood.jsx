@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Auth/AuthProvider";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddFood = () => {
     const {user} = useContext(AuthContext);
@@ -38,7 +39,14 @@ const AddFood = () => {
             expire_date,
             notes
         })
-        .then(res=> console.log("your data successfully posted to server"))
+        .then(res=> {
+            console.log("your data successfully posted to server");
+            Swal.fire({
+                title: "Good job!",
+                text: "Your Food Added Successfully-->>",
+                icon: "success"
+              });
+        })
         .catch(error => console.log(error))
     }
     return (
