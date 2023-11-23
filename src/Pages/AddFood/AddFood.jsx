@@ -52,7 +52,7 @@ const AddFood = () => {
     return (
         <div>
             <h2 className="text-center mt-5 text-4xl font-bold text-red-600">Add Food</h2>
-            <div className=" w-8/12 py-10 mx-auto border-2 border-red-500">
+            <div className=" w-8/12 py-10 mx-auto bg-red-50 rounded my-5">
                 <form onSubmit={handleAddFood} className="max-w-md mx-auto">
                     {/* food image */}
                     <div className="relative z-0 w-full mb-5 group">

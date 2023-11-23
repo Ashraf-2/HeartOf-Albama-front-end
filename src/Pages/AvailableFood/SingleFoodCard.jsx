@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 
+import { Link } from "react-router-dom";
+
 const SingleFoodCard = ({ food }) => {
     const { _id, food_img, food_name, food_status, donator_name, donator_email, donator_photo, food_quantity, pickup_location, expire_date, notes } = food;
     return (
@@ -10,8 +12,6 @@ const SingleFoodCard = ({ food }) => {
                 </div>
                 <div className="flex-1">
                     <h2 className="card-title">{food_name}</h2>
-                    
-                    
                     <p><span className="font-bold">Qunaity</span>: {food_quantity} Person </p>
                     <p><span className="font-bold">Expire Date:</span> {expire_date} </p>
                     <p><span className="font-bold">Pickup Location:</span> {pickup_location}</p>
@@ -23,7 +23,7 @@ const SingleFoodCard = ({ food }) => {
                         <p>Donator: <span className="font-bold">{donator_name}</span></p>
                     </div>
                     <div className="text-center">
-                        <button className="btn btn-secondary w-full">Details</button>
+                        <Link to={`/foodDetail/${_id}`}><button className="btn btn-secondary w-full">Details</button></Link>
                     </div>
                 </div>
             </div>
