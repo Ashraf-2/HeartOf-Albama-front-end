@@ -4,9 +4,9 @@
 const SingleFoodCard = ({ food }) => {
     const { _id, food_img, food_name, food_status, donator_name, donator_email, donator_photo, food_quantity, pickup_location, expire_date, notes } = food;
     return (
-            <div className="flex flex-row justify-start p-3  gap-2 bg-base-100 shadow-xl">
-                <div className="flex-1 border-red-500  border-2">
-                    <img className="h-full object-cover " src={food_img} alt={food_name} />
+            <div className="flex flex-col md:flex-row justify-start p-3  gap-2 bg-base-100 shadow-xl">
+                <div className="flex-1 ">
+                    <img className="h-full object-cover rounded" src={food_img} alt={food_name} />
                 </div>
                 <div className="flex-1">
                     <h2 className="card-title">{food_name}</h2>
