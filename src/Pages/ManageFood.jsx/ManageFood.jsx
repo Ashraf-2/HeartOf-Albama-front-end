@@ -7,7 +7,6 @@ const ManageFood = () => {
     const { user } = useContext(AuthContext);
     const availableFoods = useLoaderData();
    
-   
     // console.log(user.email);
     const email = user?.email || null;
     // console.log(email);
@@ -18,19 +17,17 @@ const ManageFood = () => {
 
 
     // const url = `http://localhost:5000/manageFoods?email=${user?.email}`;
-    // const [availabelFoods, setAvailableFoods] = useState([]);
-
-    // useEffect(() => {
-    //     fetch('http://localhost:5000/availableFoods')
-    //         .then(res => res.json())
-    //         .then(data => setAvailableFoods(data))
-    // }, [])
+    /**
+     * axios.get(url)
+     * .then(res => console.log(res.data))
+     * .catch(error => console.log(error))
+     */
 
 
    
     return (
         <div>
-            <h2>Manage Food</h2>
+            <h2 className="text-center">Manage Food: {results.length}</h2>
         </div>
     );
 };

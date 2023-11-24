@@ -6,11 +6,11 @@ const FeaturedFood = () => {
     const [availableFoods, setAvailableFoods] = useState([]);
 
 
-    // useEffect(() => {
-    //     fetch('http://localhost:5000/availableFoods')
-    //         .then(res => res.json())
-    //         .then(data => setAvailableFoods(data));
-    // }, [])
+    useEffect(() => {
+        fetch('http://localhost:5000/availableFoods')
+            .then(res => res.json())
+            .then(data => setAvailableFoods(data));
+    }, [])
 
     console.log(availableFoods);
     const availableFoodSorted = availableFoods.sort((a, b) => b.food_quantity - a.food_quantity);
