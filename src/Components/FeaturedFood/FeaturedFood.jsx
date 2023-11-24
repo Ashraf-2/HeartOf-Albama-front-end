@@ -12,9 +12,10 @@ const FeaturedFood = () => {
             .then(data => setAvailableFoods(data));
     }, [])
 
-    console.log(availableFoods);
+    // console.log(availableFoods);
     const availableFoodSorted = availableFoods.sort((a, b) => b.food_quantity - a.food_quantity);
-    console.log(availableFoodSorted);
+    // const availableFoodSorted = availableFoods.sort((a, b) => b.expire_date - a.expire_date);
+    // console.log(availableFoodSorted);
 
 
     return (
