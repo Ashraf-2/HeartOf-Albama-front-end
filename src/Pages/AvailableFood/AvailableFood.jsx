@@ -13,28 +13,16 @@ const AvailableFood = () => {
 
     const results = availableFoods.filter(food => food.food_name.toLowerCase().includes(query));
     
-    //expire date sorting
-    //const resultsByExpireDate = results.sort((a,b) => b.expire_date - a.expire_date);
     const today = new Date();
     console.log("today: ", today);
 
     const resultsByExpireDate = [...results].filter(expDt => new Date(expDt.expire_date) > today).sort((a,b) => new Date(a.expire_date) - new Date(b.expire_date));
     
-    console.log('expire date: ',resultsByExpireDate)
+    // console.log('expire date: ',resultsByExpireDate)
 
-    const numberOfFoodBySort = resultsByExpireDate.length || null;
+    const numberOfFoodBySort = resultsByExpireDate.length || 0;
 
-    /**
-     *  const today = new Date();
-    const filteredUsers = users
-      .filter((user) => new Date(user.birthday) > today)
-      .sort((a, b) => new Date(a.birthday) - new Date(b.birthday));
-     */
-    
-    // console.log('results: ', results);
-    // const availableFoodSorted = availableFoods.sort((a, b) => b.food_quantity - a.food_quantity);
 
-    
     return (
         <div>
             <h2 className="text-4xl text-center font-bold">Available Food: 
@@ -42,13 +30,14 @@ const AvailableFood = () => {
                 sortByExpireDate?
                 numberOfFoodBySort
                 :
-                availableFoods.length
-            }</h2>
+                results.length
+            }
+            </h2>
             
-            <div className="max-w-xl mx-auto border-2 flex justify-center gap-2 my-4">
+            <div className="max-w-xl mx-auto flex justify-center gap-2 my-4">
+                {/* search and sort field */}
                 <input onChange={(e) => setQuery(e.target.value)} className="input input-bordered w-full max-w-xs" type="text" name="search" placeholder="Search Food.." />
                 <button onClick={()=>setSortByExpireDate(!sortByExpireDate)} className="btn btn-info">Sort by Expire Date</button>
-
             </div>
             {/* to show all foods */}
             <div>
@@ -56,6 +45,7 @@ const AvailableFood = () => {
                     sortByExpireDate && <p className="italic text-sm">**Expired Food has been ignored</p>
                 }
             </div>
+            {/* show every single food in card-wise */}
             <div >
                 {
                     results.length > 0 ?

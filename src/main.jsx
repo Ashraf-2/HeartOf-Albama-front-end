@@ -17,6 +17,7 @@ import AuthProvider from './Auth/AuthProvider';
 import ErrorPage from './Pages/ErrorPage/ErrorPage';
 import PrivateRoutes from './Components/PrivateRoute/PrivateRoutes';
 import SingleFoodDetail from './Pages/SingleFoodDetail/SingleFoodDetail';
+import UpdateFood from './Pages/UpdateFood/UpdateFood';
 
 
 const router = createBrowserRouter([
@@ -43,7 +44,6 @@ const router = createBrowserRouter([
         path: "/availabeFood",
         element: <AvailableFood></AvailableFood>,
         loader: ()=> fetch("http://localhost:5000/availableFoods")
-
       },
       {
         path: "/foodRequest",
@@ -62,8 +62,11 @@ const router = createBrowserRouter([
         path: "/foodDetail/:id",
         element: <PrivateRoutes><SingleFoodDetail></SingleFoodDetail></PrivateRoutes>,
         loader: ({params}) => fetch(`http://localhost:5000/availableFoods/${params.id}`)
-        
-
+      },
+      {
+        path: "/updateFood/:id",
+        element: <PrivateRoutes><UpdateFood></UpdateFood></PrivateRoutes>,
+        loader: ({params}) => fetch(`http://localhost:5000/availableFoods/${params.id}`)
       }
     ]
   },
