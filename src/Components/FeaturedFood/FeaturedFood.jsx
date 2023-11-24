@@ -20,7 +20,7 @@ const FeaturedFood = () => {
 
     return (
         <div>
-            <h2 className="text-center font-bold text-4xl">Featured Food</h2>
+            <h2 className="text-center font-bold text-5xl  my-5">Featured Food</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 {
                     availableFoodSorted.slice(0, 6).map(food => <SingleFoodCard key={food._id} food={food}></SingleFoodCard>)
