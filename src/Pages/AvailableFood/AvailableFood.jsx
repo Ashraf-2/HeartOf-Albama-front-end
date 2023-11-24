@@ -6,18 +6,16 @@ import animationData from '../../assets/empty-with-man.json'
 
 const AvailableFood = () => {
     const availableFoods = useLoaderData();
-    // console.log(availableFoods);
-
     const [query, setQuery] = useState("");
     const [sortByExpireDate, setSortByExpireDate] = useState(true);
+    
     console.log(sortByExpireDate);
 
-    // console.log("query : ", query);
     const results = availableFoods.filter(food => food.food_name.toLowerCase().includes(query));
     
     //expire date sorting
-    const sortByExpireDate = results.sort((a,b) => b.expire_date - a.expire_date);
-    // console.log('expire date: ',resultsByExpireDate)
+    const resultsByExpireDate = results.sort((a,b) => b.expire_date - a.expire_date);
+    console.log('expire date: ',resultsByExpireDate)
     
     // console.log('results: ', results);
     // const availableFoodSorted = availableFoods.sort((a, b) => b.food_quantity - a.food_quantity);
