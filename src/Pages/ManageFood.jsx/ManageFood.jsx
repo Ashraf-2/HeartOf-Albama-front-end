@@ -3,6 +3,7 @@ import { AuthContext } from "../../Auth/AuthProvider";
 import axios from "axios";
 import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
+import { ToastContainer, toast } from "react-toastify";
 
 const ManageFood = () => {
     const { user } = useContext(AuthContext);
@@ -23,22 +24,28 @@ const ManageFood = () => {
      */
 
     //handle delete to delete a food from the server
+    console.log("foods before: ", foods);
     const handleDelete = (id) => {
         console.log(id);
         axios.delete(`http://localhost:5000/availableFoods/${id}`)
             .then(res => {
                 if (res.data.deletedCount > 0) {
                     console.log("successfully deleted")
-                    const remains = results.filter(result => result._id !== id);
+                    const remains = foods.filter(result => result._id !== id);
                     console.log(remains);
-                    Swal("Done", "Deleted successfully", "success")
+                    Swal.fire({
+                        title: "Delete Food!",
+                        text: "Your Food Added Successfully-->>",
+                        icon: "success"
+                    });
+
                     setFoods(remains)
                 }
                 console.log('deleted req id: ', id)
             })
             .catch(error => console.log(error))
     }
-
+    console.log("foods after: ", foods);
     return (
         <div>
             <h2 className="text-center">Manage Food: {foods.length}</h2>
@@ -53,10 +60,12 @@ const ManageFood = () => {
                         </div>
                         <div className="flex flex-col gap-2">
                             <Link to={`/updateFood/${singleFood._id}`}>
-                                <button className="btn btn-secondary">Edit</button>
+                                <button className="btn btn-secondary">Update</button>
                             </Link>
                             <button onClick={() => handleDelete(singleFood._id)} className="btn btn-info">Delete</button>
-                            <button className="btn btn-outline">Manage</button>
+                            <Link to={`/mngFd/${singleFood.donator_email}`}>
+                                <button className="btn btn-outline">Manage</button>
+                            </Link>
                         </div>
                     </div>)
                 }
