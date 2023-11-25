@@ -42,7 +42,7 @@ const AddFood = () => {
         .then(res=> {
             console.log("your data successfully posted to server");
             Swal.fire({
-                title: "Good job!",
+                title: "Thank you!",
                 text: "Your Food Added Successfully-->>",
                 icon: "success"
               });

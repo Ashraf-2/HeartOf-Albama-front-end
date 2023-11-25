@@ -15,9 +15,6 @@ const ManageFood = () => {
     console.log("results: ", results);
     const [foods, setFoods] = useState(results);
 
-
-
-
     // const url = `http://localhost:5000/manageFoods?email=${user?.email}`;
     /**
      * axios.get(url)
