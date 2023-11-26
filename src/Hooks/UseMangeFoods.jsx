@@ -3,13 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 const UseMangeFoods = () => {
 
     const {data, isLoading, isFetching, refetch} = useQuery({
-        queryKey: ["myFoods"],
+        queryKey: ["uks"],
         queryFn: async () => {
             const data = await fetch("http://localhost:5000/availableFoods");
             // const myFoods = await data.json();
             // return myFoods; //bellow another way
             return await data.json();
-    
+
         }
     })
 

@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
+import BasicTable from "../MngFd/BasicTable";
 
 const ManageFood = () => {
     const { user } = useContext(AuthContext);
@@ -49,6 +50,7 @@ const ManageFood = () => {
     return (
         <div>
             <h2 className="text-center">Manage Food: {foods.length}</h2>
+            <BasicTable></BasicTable>
             <div className="grid grid-cols-3 gap-3">
                 {
                     foods.map(singleFood => <div className="border-2 p-4 max-w-4xl flex flex-row items-center gap-5" key={singleFood._id}>
