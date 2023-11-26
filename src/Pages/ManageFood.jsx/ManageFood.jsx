@@ -14,7 +14,7 @@ const ManageFood = () => {
     const email = user?.email || null;
     // console.log(email);
     const results = availableFoods.filter(food => food.donator_email === email);
-    console.log("results: ", results);
+    // console.log("results: ", results);
     const [foods, setFoods] = useState(results);
 
     // const url = `http://localhost:5000/manageFoods?email=${user?.email}`;
@@ -25,7 +25,7 @@ const ManageFood = () => {
      */
 
     //handle delete to delete a food from the server
-    console.log("foods before: ", foods);
+    // console.log("foods before: ", foods);
     const handleDelete = (id) => {
         console.log(id);
         axios.delete(`http://localhost:5000/availableFoods/${id}`)
@@ -46,12 +46,12 @@ const ManageFood = () => {
             })
             .catch(error => console.log(error))
     }
-    console.log("foods after: ", foods);
+    // console.log("foods after: ", foods);
     return (
         <div>
             <h2 className="text-center">Manage Food: {foods.length}</h2>
-            <BasicTable></BasicTable>
-            <div className="grid grid-cols-3 gap-3">
+            {/* <BasicTable></BasicTable> */}
+            {/* <div className="grid grid-cols-3 gap-3">
                 {
                     foods.map(singleFood => <div className="border-2 p-4 max-w-4xl flex flex-row items-center gap-5" key={singleFood._id}>
                         <div>
@@ -71,6 +71,55 @@ const ManageFood = () => {
                         </div>
                     </div>)
                 }
+            </div> */}
+            
+            {/* table show */}
+            <div className="overflow-x-auto my-10">
+                <table className="table">
+                    {/* head */}
+                    <thead>
+                        <tr>
+                            <th>SL No.</th>
+                            <th>Food Info</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                            <th>Manage Food</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {/* row 1 */}
+                        {
+                            foods.map((oneFood, index) => <tr key={index}>
+                                <td>{index+1}</td>
+                                <td >
+                                    <div className="flex items-center gap-3">
+                                        <div className="avatar">
+                                            <div className="mask mask-squircle w-12 h-12">
+                                                <img src={oneFood.food_img} alt="Avatar Tailwind CSS Component" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="font-bold">{oneFood.food_name}</div>
+                                            <div className="text-sm opacity-50">{oneFood.donator_email}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td >
+                                    <Link to={`/updateFood/${oneFood._id}`}><button className="btn btn-info">Update</button></Link>
+                                </td>
+                                <td >
+                                    <button onClick={() => handleDelete(oneFood._id)} className="btn btn-ghost">Delete</button>
+                                </td>
+                                <td >
+                                    <Link to={`/mngFd/${oneFood.donator_email}`}><button className="btn btn-outline">Manage</button></Link>
+                                </td>
+
+                            </tr>)
+                        }
+                    </tbody>
+
+
+                </table>
             </div>
         </div>
     );
