@@ -62,7 +62,6 @@ const AvailableFood = () => {
                         <div className="flex flex-col justify-center items-center">
                             <Lottie className="w-3/12" animationData={animationData}></Lottie>
                             <h2 className="text-center text-4xl text-red-500 font-bold mt-5 mb-10">Sorry Fruit not found</h2>
-
                         </div>
                 }
             </div>

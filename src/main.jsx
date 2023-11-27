@@ -21,6 +21,7 @@ import UpdateFood from './Pages/UpdateFood/UpdateFood';
 import MngFd from './Pages/MngFd/MngFd';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ManageSingleFood from './Pages/MngFd/ManageSingleFood';
+import ManageFoodwithReq from './Pages/ManageFood.jsx/ManageFoodwithReq';
 
 
 const router = createBrowserRouter([
@@ -50,7 +51,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/foodRequest",
-        element: <PrivateRoutes><FoodRequest></FoodRequest></PrivateRoutes>
+        element: <PrivateRoutes><FoodRequest></FoodRequest></PrivateRoutes>,
+        loader: () => fetch("http://localhost:5000/foodRequest")
       },
       {
         path: "/login",
@@ -76,8 +78,10 @@ const router = createBrowserRouter([
         element: <MngFd></MngFd>
       },
       {
-        path: "/mngFd/:donator_email",
-        element: <ManageSingleFood></ManageSingleFood>
+        path: "/manageFoods/:id",
+        element: <ManageFoodwithReq></ManageFoodwithReq>,
+        loader: ({ params }) => fetch(`http://localhost:5000/availableFoods/${params.id}`)
+
       }
     ]
   },

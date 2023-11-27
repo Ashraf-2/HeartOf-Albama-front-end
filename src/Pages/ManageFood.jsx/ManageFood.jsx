@@ -49,7 +49,7 @@ const ManageFood = () => {
     // console.log("foods after: ", foods);
     return (
         <div>
-            <h2 className="text-center">Manage Food: {foods.length}</h2>
+            <h2 className="text-center text-3xl font-bold">Manage Your Food: {foods.length}</h2>
             {/* <BasicTable></BasicTable> */}
             {/* <div className="grid grid-cols-3 gap-3">
                 {
@@ -72,7 +72,6 @@ const ManageFood = () => {
                     </div>)
                 }
             </div> */}
-            <button className="btn btn-outline ">bro</button>
             {/* table show */}
             <div className="overflow-x-auto my-10">
                 <table className="table">
@@ -111,7 +110,7 @@ const ManageFood = () => {
                                     <button onClick={() => handleDelete(oneFood._id)} className="btn btn-ghost">Delete</button>
                                 </td>
                                 <td >
-                                    <Link to={`/mngFd/${oneFood.donator_email}`}><button className="btn btn-outline">Manage</button></Link>
+                                    <Link to={`/mngFd/${oneFood._id}`}><button className="btn btn-outline">Manage</button></Link>
                                 </td>
 
                             </tr>)

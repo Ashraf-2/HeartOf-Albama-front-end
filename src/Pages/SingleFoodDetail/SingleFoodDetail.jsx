@@ -1,6 +1,6 @@
 import { useLoaderData, useParams } from "react-router-dom";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Auth/AuthProvider";
 import Swal from "sweetalert2";
 import { ToastContainer, toast } from 'react-toastify';
@@ -9,24 +9,25 @@ import axios from "axios";
 
 
 const SingleFoodDetail = () => {
+    const [closingInfo, setClosingInfo] = useState(false);
     const { user } = useContext(AuthContext);
+    console.log("user: ",user);
     const id = useParams();
     console.log("params id: ", id);
     const food = useLoaderData();
     // console.log("my target food: ", food);
-    const { _id, food_img, food_name, food_status, donator_name, donator_email, donator_photo, food_quantity, pickup_location, expire_date, notes,delivery_status } = food;
-    console.log("delivery status: ", delivery_status);
-    const today = new Date().toISOString().split('T')[0];
-    // console.log("today: ", today);
 
-    // const handleSubmitRequest = (e) => {
-    //     e.preventDefault();
-    //     Swal.fire({
-    //         title: "Thank you!",
-    //         text: "Your Food Added Successfully-->>",
-    //         icon: "success"
-    //     });
-    // }
+    const { _id, food_img, food_name, food_status, donator_name, donator_email, donator_photo, food_quantity, pickup_location, expire_date, notes, delivery_status } = food;
+    console.log("delivery status: ", delivery_status);
+
+    const today = new Date().toISOString().split('T')[0];
+    // const today = new Date().toLocaleDateString().split('T')[0];
+    console.log("today: ", today);
+
+    // console.log("condition: ",expire_date>today)
+    console.log("today -> expire day: ", today, expire_date)
+
+    //unneccessary
     const notify = () => {
         console.log('clicked')
         toast("request done", {
@@ -44,12 +45,16 @@ const SingleFoodDetail = () => {
         e.preventDefault();
         const form = e.target;
         console.log("id: ", _id);
-        
-        const donation_amount =form.donation_money.value;
-        console.log("food donation: ",donation_amount);
+
+        const donation_amount = form.donation_money.value;
+        const request_date = form.request_date.value;
+        const requester_name = user?.displayName;
+        const requester_email = form.user_email.value;
+        const requester_photo = user?.photoURL;
+        console.log("food donation , request date ", donation_amount,request_date);
         //food request -crud
-        const newFoodRequest ={
-            id2: _id,
+        const newFoodRequest = {
+            refId: _id,
             food_img,
             food_name,
             food_status,
@@ -61,17 +66,22 @@ const SingleFoodDetail = () => {
             expire_date,
             notes,
             delivery_status: "pending",
-            donation_amount
+            donation_amount,
+            request_date,
+            requester_name,
+            requester_email,
+            requester_photo
+
         }
-        axios.post('http://localhost:5000/foodRequest',newFoodRequest)
-        .then(res=> {
-            console.log('your food request sent to server');
-        })
-        .catch(error => console.log(error))
+        axios.post('http://localhost:5000/foodRequest', newFoodRequest)
+            .then(res => {
+                console.log('your food request sent to server');
+            })
+            .catch(error => console.log(error))
 
 
         //food update -crud
-        const updateFood = { 
+        const updateFood = {
             food_img,
             food_name,
             food_status,
@@ -84,14 +94,26 @@ const SingleFoodDetail = () => {
             notes,
             delivery_status: "pending"
         }
-        axios.put(`http://localhost:5000/availableFoods/${_id}`,updateFood)
-        .then(res => {
-            console.log('successfully send the update request')
-        })
-        .catch(error => console.log(error))
-        console.log("food request: ",newFoodRequest);
-        console.log("update food: ",updateFood);
+
+        // update food delivery status
+        axios.put(`http://localhost:5000/availableFoods/${_id}`, updateFood)
+            .then(res => {
+                console.log('successfully send the update request')
+            })
+            .catch(error => console.log(error))
+
+        console.log("food request: ", newFoodRequest);
+        console.log("update food: ", updateFood);
+
+        setClosingInfo(true);
+
+        Swal.fire({
+            title: "Thank you!",
+            text: "Your Food request is successfully-->>",
+            icon: "success"
+        });
     }
+
 
     return (
         <div className="max-w-6xl mx-auto grid md:grid-cols-12 gap-5 items-center px-2 my-5">
@@ -107,7 +129,24 @@ const SingleFoodDetail = () => {
                 <p className="text-xl"> <span className="font-semibold">Notes:</span> {notes}</p>
                 {/* food request button */}
                 <div className="text-center my-5">
-                    <button disabled={food_status !== 'available'} className="btn w-3/6 text-base text-center mx-auto btn-secondary" onClick={() => document.getElementById('my_modal_2').showModal()}>Request Food </button>
+                    <button disabled={food_status !== 'available' || delivery_status === 'pending' || user.email === donator_email || today > expire_date === true || closingInfo === true} className="btn w-3/6 text-base text-center mx-auto btn-secondary" onClick={() => document.getElementById('my_modal_2').showModal()}>Request Food </button>
+
+                    {/* disable reason show */}
+                    <div>
+                        {
+                            user?.email === donator_email && <p className="italic text-sm">Sorry you can not request for your own food</p>
+                        }
+                        {
+                            today > expire_date && <p className="italic text-sm">Sorry! This food is expired.</p>
+                        }
+                        {
+                            closingInfo && <p>Thank you!You already sent reaquest.</p>
+                        }
+                        {
+                            delivery_status==='pending' && <p>Sorry! Food request already sent.</p>
+                        }
+                    </div>
+
                 </div>
                 <div className="text-xl">
                     <p> <span className="font-semibold">Donetor Name</span>: {donator_name}</p>
@@ -121,14 +160,12 @@ const SingleFoodDetail = () => {
                 <dialog id="my_modal_2" className="modal">
                     <div className="modal-box w-11/12 max-w-5xl">
                         <h3 className="font-bold text-lg text-center">Checkout form of Your Food Request!</h3>
-                        <form method="dialog">
+                        {/* <form method="dialog">
                             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                        </form>
+                        </form> */}
                         <div className=" w-8/12 py-10 mx-auto bg-red-50 rounded my-5">
                             <form onSubmit={handleSubmitRequest} className="max-w-md mx-auto">
                                 {/* food image */}
-
-
                                 <div className="relative z-0 w-full mb-5 group">
                                     <input type="text" name="food_img" id="food_img" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " defaultValue={food_img} readOnly required />
                                     <label htmlFor="food_img" className="peer-focus:font-medium absolute text-base text-black dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Food Image Url</label>
@@ -191,7 +228,7 @@ const SingleFoodDetail = () => {
                                     </div>
                                     {/* expire date */}
                                     <div className="relative z-0 w-full mb-5 group">
-                                        <input type="date" name="expire_date" id="expire_date" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " defaultValue={expire_date} required />
+                                        <input type="date" name="expire_date" id="expire_date" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " defaultValue={expire_date} readOnly required />
                                         <label htmlFor="expire_date" className="peer-focus:font-medium absolute text-base text-black dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Expire Date</label>
                                     </div>
                                 </div>
@@ -203,8 +240,26 @@ const SingleFoodDetail = () => {
                                 </div>
 
                                 {/* <form method="dialog" className=""> */}
-                                <button type="submit" className="text-white bg-red-600 hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Request Food</button>
-                                <ToastContainer></ToastContainer>
+                                {/* <button disabled={closingInfo} type="submit" className="text-white bg-red-600 hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Request Food</button> */}
+                                <button disabled={closingInfo} type="submit" className="btn btn-outline bg-red-600 text-white">Request Food</button>
+
+                                <form method="dialog">
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <div className="flex justify-end">
+                                        <button className="btn btn-outline">Close</button>
+                                    </div>
+                                </form>
+
+                                <div>
+                                    {
+                                        closingInfo && <div>
+                                            <p>Your request sent sucessfully</p>
+                                            <p className="italic text-sm">*Please close this request form</p>
+                                        </div>
+                                    }
+                                </div>
+                                {/* <ToastContainer></ToastContainer> */}
+
                                 {/* </form> */}
                             </form>
                         </div>
