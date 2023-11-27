@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../Auth/AuthProvider";
 import Swal from "sweetalert2";
 import { ToastContainer, toast } from 'react-toastify';
+import axios from "axios";
 
 
 
@@ -12,11 +13,11 @@ const SingleFoodDetail = () => {
     const id = useParams();
     console.log("params id: ", id);
     const food = useLoaderData();
-    console.log("my target food: ", food);
-    const { _id, food_img, food_name, food_status, donator_name, donator_email, donator_photo, food_quantity, pickup_location, expire_date, notes } = food;
-
+    // console.log("my target food: ", food);
+    const { _id, food_img, food_name, food_status, donator_name, donator_email, donator_photo, food_quantity, pickup_location, expire_date, notes,delivery_status } = food;
+    console.log("delivery status: ", delivery_status);
     const today = new Date().toISOString().split('T')[0];
-    console.log("today: ", today);
+    // console.log("today: ", today);
 
     // const handleSubmitRequest = (e) => {
     //     e.preventDefault();
@@ -39,6 +40,58 @@ const SingleFoodDetail = () => {
             theme: "light",
         });
     }
+    const handleSubmitRequest = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        console.log("id: ", _id);
+        
+        const donation_amount =form.donation_money.value;
+        console.log("food donation: ",donation_amount);
+        //food request -crud
+        const newFoodRequest ={
+            id2: _id,
+            food_img,
+            food_name,
+            food_status,
+            donator_name,
+            donator_email,
+            donator_photo,
+            food_quantity,
+            pickup_location,
+            expire_date,
+            notes,
+            delivery_status: "pending",
+            donation_amount
+        }
+        axios.post('http://localhost:5000/foodRequest',newFoodRequest)
+        .then(res=> {
+            console.log('your food request sent to server');
+        })
+        .catch(error => console.log(error))
+
+
+        //food update -crud
+        const updateFood = { 
+            food_img,
+            food_name,
+            food_status,
+            donator_name,
+            donator_email,
+            donator_photo,
+            food_quantity,
+            pickup_location,
+            expire_date,
+            notes,
+            delivery_status: "pending"
+        }
+        axios.put(`http://localhost:5000/availableFoods/${_id}`,updateFood)
+        .then(res => {
+            console.log('successfully send the update request')
+        })
+        .catch(error => console.log(error))
+        console.log("food request: ",newFoodRequest);
+        console.log("update food: ",updateFood);
+    }
 
     return (
         <div className="max-w-6xl mx-auto grid md:grid-cols-12 gap-5 items-center px-2 my-5">
@@ -52,9 +105,9 @@ const SingleFoodDetail = () => {
                 <p className="text-xl"> <span className="font-semibold">Pickup Location</span>: {pickup_location}</p>
                 <p className="text-xl"> <span className="font-semibold">Expire Date</span>: {expire_date}</p>
                 <p className="text-xl"> <span className="font-semibold">Notes:</span> {notes}</p>
+                {/* food request button */}
                 <div className="text-center my-5">
-
-                    <button className="btn w-3/6 text-base text-center mx-auto btn-secondary" onClick={() => document.getElementById('my_modal_2').showModal()}>Request Food </button>
+                    <button disabled={food_status !== 'available'} className="btn w-3/6 text-base text-center mx-auto btn-secondary" onClick={() => document.getElementById('my_modal_2').showModal()}>Request Food </button>
                 </div>
                 <div className="text-xl">
                     <p> <span className="font-semibold">Donetor Name</span>: {donator_name}</p>
@@ -72,7 +125,7 @@ const SingleFoodDetail = () => {
                             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                         </form>
                         <div className=" w-8/12 py-10 mx-auto bg-red-50 rounded my-5">
-                            <form onSubmit={notify} className="max-w-md mx-auto">
+                            <form onSubmit={handleSubmitRequest} className="max-w-md mx-auto">
                                 {/* food image */}
 
 

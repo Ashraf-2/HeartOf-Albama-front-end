@@ -72,7 +72,7 @@ const ManageFood = () => {
                     </div>)
                 }
             </div> */}
-            
+            <button className="btn btn-outline ">bro</button>
             {/* table show */}
             <div className="overflow-x-auto my-10">
                 <table className="table">
