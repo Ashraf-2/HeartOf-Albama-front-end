@@ -1,12 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
+import { useContext } from "react";
+import { AuthContext } from "../Auth/AuthProvider";
 
-const UseMangeFoods = () => {
-
+const UseRequestData = () => {
+    const {user,loading} = useContext(AuthContext);
     const { data, isLoading, isFetching, refetch } = useQuery({
-        queryKey: ["uks"],
+        queryKey: ["requests"],
+        enabled: !loading,
         queryFn: async () => {
             try {
-                const response = await fetch('http://localhost:5000/availableFoods');
+                const response = await fetch('http://localhost:5000/foodRequest');
           
                 if (!response.ok) {
                   throw new Error(`Failed to fetch data: ${response.statusText}`);
@@ -26,4 +29,4 @@ const UseMangeFoods = () => {
     return { data, isLoading, isFetching, refetch }
 };
 
-export default UseMangeFoods;
+export default UseRequestData;

@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import Swal from "sweetalert2";
 
 const FoodCardShow = ({ food, refetch }) => {
-    console.log(food);
+    // console.log(food);
     // console.log(Object.keys(food).join(','))
     const {
         _id,

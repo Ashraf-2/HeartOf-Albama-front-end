@@ -27,6 +27,7 @@ const MngFd = () => {
     // const {data,refetch} = UseMangeFoods();
 
     console.log("data: ", data);
+    console.log("data type: ", typeof(data));
 
     return (
         <div>
@@ -34,7 +35,7 @@ const MngFd = () => {
             <h2>Manage Food: {data?.length}</h2>
             <div className="grid grid-cols-3 gpa-5">
                 {
-                    data && data?.map(food => <FoodCardShow refetch={refetch} key={food._id} food={food}></FoodCardShow>)
+                    data && data?.map(food => <FoodCardShow frefetch={refetch} key={food._id} food={food}></FoodCardShow>)
                 }
             </div>
         </div>
