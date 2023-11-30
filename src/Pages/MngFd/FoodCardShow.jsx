@@ -63,7 +63,7 @@ const FoodCardShow = ({ food, refetch }) => {
                         <button className="btn btn-info">Update</button>
                     </Link>
                     <button onClick={handleDelte} className="btn btn-secondary">Delete</button>
-                    <Link to={`/mngFd/${donator_email}`}>
+                    <Link to={`/mngFd/${_id}`}>
                         <button className="btn btn-outline">Manage</button>
                     </Link>
                 </div>

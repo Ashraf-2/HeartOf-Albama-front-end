@@ -110,7 +110,7 @@ const ManageFood = () => {
                                     <button onClick={() => handleDelete(oneFood._id)} className="btn btn-ghost">Delete</button>
                                 </td>
                                 <td >
-                                    <Link to={`/mngFd/${oneFood._id}`}><button className="btn btn-outline">Manage</button></Link>
+                                    <Link to={`/manageFoods/${oneFood._id}`}><button className="btn btn-outline">Manage</button></Link>
                                 </td>
 
                             </tr>)

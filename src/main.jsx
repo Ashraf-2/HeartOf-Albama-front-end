@@ -45,6 +45,12 @@ const router = createBrowserRouter([
 
       },
       {
+        path: "/manageFoods/:id",
+        element: <ManageFoodwithReq></ManageFoodwithReq>,
+        loader: ({ params }) => fetch(`http://localhost:5000/foodRequest/${params.id}`)
+
+      },
+      {
         path: "/availabeFood",
         element: <AvailableFood></AvailableFood>,
         loader: () => fetch("http://localhost:5000/availableFoods")
@@ -77,12 +83,7 @@ const router = createBrowserRouter([
         path: "/mngFd",
         element: <MngFd></MngFd>
       },
-      {
-        path: "/manageFoods/:id",
-        element: <ManageFoodwithReq></ManageFoodwithReq>,
-        loader: ({ params }) => fetch(`http://localhost:5000/availableFoods/${params.id}`)
-
-      }
+      
     ]
   },
 ]);
