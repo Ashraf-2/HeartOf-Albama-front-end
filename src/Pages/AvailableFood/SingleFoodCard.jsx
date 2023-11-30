@@ -3,11 +3,12 @@
 
 import { Link } from "react-router-dom";
 
-const SingleFoodCard = ({ food }) => {
+const SingleFoodCard = ({ food,index }) => {
+    console.log('index: ',index);
     // console.log(food);
     const {_id, food_img, food_name, food_status, donator_name, donator_email, donator_photo, food_quantity, pickup_location, expire_date, notes } = food;
     return (
-            <div className="flex flex-col md:flex-row justify-start p-3  gap-2 bg-base-100 shadow-xl">
+            <div data-aos={index && (index+1) % 2 ===0 ? "zoom-in-left": "zoom-in-right" } className="flex flex-col md:flex-row justify-start p-3  gap-2 bg-base-100 shadow-xl" data-aos-offset="300" data-aos-easing="ease-in-sine" data-aos-duration="1000">
                 <div className="flex-1 ">
                     <img className="h-full object-cover rounded" src={food_img} alt={food_name} />
                 </div>

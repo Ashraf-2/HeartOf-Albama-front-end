@@ -16,7 +16,6 @@ const Navbar = () => {
         <li> <NavLink to="/addFood">Add Food</NavLink> </li>
         <li> <NavLink to="/manageFoods">Manage My Foods</NavLink> </li>
         <li> <NavLink to="/foodRequest">My Food Request</NavLink> </li>
-        <li> <NavLink to="/mngFd">MngFd</NavLink> </li>
     </>
     return (
         <div className="navbar bg-base-100">

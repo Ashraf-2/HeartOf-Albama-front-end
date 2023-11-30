@@ -18,9 +18,7 @@ import ErrorPage from './Pages/ErrorPage/ErrorPage';
 import PrivateRoutes from './Components/PrivateRoute/PrivateRoutes';
 import SingleFoodDetail from './Pages/SingleFoodDetail/SingleFoodDetail';
 import UpdateFood from './Pages/UpdateFood/UpdateFood';
-import MngFd from './Pages/MngFd/MngFd';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import ManageSingleFood from './Pages/MngFd/ManageSingleFood';
 import ManageFoodwithReq from './Pages/ManageFood.jsx/ManageFoodwithReq';
 
 
@@ -78,10 +76,6 @@ const router = createBrowserRouter([
         path: "/updateFood/:id",
         element: <PrivateRoutes><UpdateFood></UpdateFood></PrivateRoutes>,
         loader: ({ params }) => fetch(`http://localhost:5000/availableFoods/${params.id}`)
-      },
-      {
-        path: "/mngFd",
-        element: <MngFd></MngFd>
       },
       
     ]

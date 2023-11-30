@@ -3,8 +3,6 @@ import { AuthContext } from "../../Auth/AuthProvider";
 import axios from "axios";
 import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
-import { ToastContainer, toast } from "react-toastify";
-import BasicTable from "../MngFd/BasicTable";
 
 const ManageFood = () => {
     const { user } = useContext(AuthContext);
@@ -17,15 +15,6 @@ const ManageFood = () => {
     // console.log("results: ", results);
     const [foods, setFoods] = useState(results);
 
-    // const url = `http://localhost:5000/manageFoods?email=${user?.email}`;
-    /**
-     * axios.get(url)
-     * .then(res => console.log(res.data))
-     * .catch(error => console.log(error))
-     */
-
-    //handle delete to delete a food from the server
-    // console.log("foods before: ", foods);
     const handleDelete = (id) => {
         console.log(id);
         axios.delete(`http://localhost:5000/availableFoods/${id}`)
@@ -50,30 +39,9 @@ const ManageFood = () => {
     return (
         <div>
             <h2 className="text-center text-3xl font-bold">Manage Your Food: {foods.length}</h2>
-            {/* <BasicTable></BasicTable> */}
-            {/* <div className="grid grid-cols-3 gap-3">
-                {
-                    foods.map(singleFood => <div className="border-2 p-4 max-w-4xl flex flex-row items-center gap-5" key={singleFood._id}>
-                        <div>
-                            <img className="w-[300px]" src={singleFood.food_img} alt={singleFood.food_name} />
-                            <p className="text-center font-bold">{singleFood.food_name}</p>
-                            <p className="text-center font-bold">{singleFood.donator_name}</p>
-                            <p className="text-center font-bold">{singleFood.donator_email}</p>
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <Link to={`/updateFood/${singleFood._id}`}>
-                                <button className="btn btn-secondary">Update</button>
-                            </Link>
-                            <button onClick={() => handleDelete(singleFood._id)} className="btn btn-info">Delete</button>
-                            <Link to={`/mngFd/${singleFood.donator_email}`}>
-                                <button className="btn btn-outline">Manage</button>
-                            </Link>
-                        </div>
-                    </div>)
-                }
-            </div> */}
+            
             {/* table show */}
-            <div className="overflow-x-auto my-10">
+            <div className="overflow-x-auto my-10"  data-aos="fade-up" data-aos-duration="1000">
                 <table className="table">
                     {/* head */}
                     <thead>
@@ -83,6 +51,8 @@ const ManageFood = () => {
                             <th>Update</th>
                             <th>Delete</th>
                             <th>Manage Food</th>
+                            <th>Food Request?</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -111,6 +81,9 @@ const ManageFood = () => {
                                 </td>
                                 <td >
                                     <Link to={`/manageFoods/${oneFood._id}`}><button className="btn btn-outline">Manage</button></Link>
+                                </td>
+                                <td>
+                                    <p>{oneFood?.delivery_status === "pending"? "Yes": "X"}</p>
                                 </td>
 
                             </tr>)

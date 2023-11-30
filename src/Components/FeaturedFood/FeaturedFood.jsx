@@ -8,24 +8,19 @@ const FeaturedFood = () => {
 
 
     useEffect(() => {
-        toast.success('success');
         fetch('http://localhost:5000/availableFoods')
             .then(res => res.json())
             .then(data => setAvailableFoods(data));
     }, [])
 
-    // console.log(availableFoods);
     const availableFoodSorted = availableFoods.sort((a, b) => b.food_quantity - a.food_quantity);
-    // const availableFoodSorted = availableFoods.sort((a, b) => b.expire_date - a.expire_date);
-    // console.log(availableFoodSorted);
-
-
+    
     return (
-        <div>
+        <div >
             <h2 className="text-center font-bold text-5xl  my-5">Featured Food</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 {
-                    availableFoodSorted.slice(0, 6).map(food => <SingleFoodCard key={food._id} food={food}></SingleFoodCard>)
+                    availableFoodSorted.slice(0, 6).map((food,index) => <SingleFoodCard index={index} key={food._id} food={food}></SingleFoodCard>)
                 }
             </div>
             <div className="text-center my-5">

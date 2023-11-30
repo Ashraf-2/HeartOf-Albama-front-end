@@ -107,14 +107,16 @@ const SingleFoodDetail = () => {
 
         setClosingInfo(true);
 
-        Swal.fire({
-            title: "Thank you!",
-            text: "Your Food request is successfully-->>",
-            icon: "success"
-        });
+        // Swal.fire({
+        //     title: "Thank you!",
+        //     text: "Your Food request is successfully-->>",
+        //     icon: "success"
+        // });
     }
 
-
+    const handleRequest =() =>{
+        toast.success('Food request successfulll!');
+    }
     return (
         <div className="max-w-6xl mx-auto grid md:grid-cols-12 gap-5 items-center px-2 my-5">
             <div className="col-span-5 h-full text-center flex flex-col items-center justify-center gap-2">
@@ -144,6 +146,9 @@ const SingleFoodDetail = () => {
                         }
                         {
                             delivery_status==='pending' && <p>Sorry! Food request already sent.</p>
+                        }
+                        {
+                            delivery_status === 'Delivered' && <p>This food is already delivered to someoneelse!</p>
                         }
                     </div>
 
@@ -239,9 +244,8 @@ const SingleFoodDetail = () => {
                                     <label htmlFor="notes" className="peer-focus:font-medium absolute text-base text-black dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Additional Notes</label>
                                 </div>
 
-                                {/* <form method="dialog" className=""> */}
-                                {/* <button disabled={closingInfo} type="submit" className="text-white bg-red-600 hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Request Food</button> */}
-                                <button disabled={closingInfo} type="submit" className="btn btn-outline bg-red-600 text-white">Request Food</button>
+                             
+                                <button onClick={handleRequest} disabled={closingInfo} type="submit" className="btn btn-outline bg-red-600 text-white">Request Food</button>
 
                                 <form method="dialog">
                                     {/* if there is a button in form, it will close the modal */}

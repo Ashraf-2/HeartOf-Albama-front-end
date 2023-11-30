@@ -4,22 +4,11 @@ import { AuthContext } from "../../Auth/AuthProvider";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import UseRequestData from "../../Hooks/UseRequestData";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const FoodRequest = () => {
-    // const requestedFood = useLoaderData();
-    // console.log('requested food: ', requestedFood);
 
-    // const {user,loading} = useContext(AuthContext);
-    // const {data, isLoading, isFetching, refetch} = useQuery({
-    //     queryKey: ["fdc"],
-    //     enabled: !loading,
-    //     queryFn: async () => {
-    //         const data = await fetch("http://localhost:5000/foodRequest");
-    //         // const myFoods = await data.json();
-    //         // return myFoods; //bellow another way
-    //         return await data.json();
-    //     }
-    // })
+    
     const {data, isLoading, isFetching, refetch} = UseRequestData();
     const {user} = useContext(AuthContext);
 
@@ -30,17 +19,7 @@ const FoodRequest = () => {
     // const [showFoods,setShowFoods] = useState(myFoodRequest);
     // console.log(showFoods);
 
-    if(isFetching || isLoading){
-        return (<div className="flex justify-center items-center my-10">
-            <span className=" text-center loading loading-spinner loading-lg"></span>
-        </div>)
-    }
-
-    // const myFoodRequest = requestedFood.filter(food => food.requester_email === user?.email) 
-    // console.log('my food request: ', myFoodRequest);
-    // console.log(Object.keys(myFoodRequest[0]).join(','));
-
-    // const {_id,refId,food_img,food_name,food_status,donator_name,donator_email,donator_photo,food_quantity,pickup_location,expire_date,notes,delivery_status,donation_amount,request_date,requester_name,requester_email,requester_photo} = requested_food;
+    
 
     const handleCanclartion = (food,id) => {
         console.log("cancel id: ", id);
@@ -83,21 +62,27 @@ const FoodRequest = () => {
 
         //delete this food from the foodRequest collections
         axios.delete(`http://localhost:5000/foodRequest/${id}`)
-        .then(res => console.log(res.data))
+        .then(res => {
+            console.log(res.data)
+            refetch();
+        })
         .catch(error => console.log(error))
 
+        
+        toast.success("Food request cancel successfull")
 
-        // axios.get('http://localhost:5000/foodRequest')
-        // .then(res => {
-        //     setShowFoods(res.data)
-        // })
-        // .catch(error => console.log(error))
+
+    }
+    if(isFetching || isLoading){
+        return (<div className="flex justify-center items-center my-10">
+            <span className=" text-center loading loading-spinner loading-lg"></span>
+        </div>)
     }
 
     return (
         <div>
             {/* <h2 className="text-center text-2xl font-bold my-5">My Food Request: {data.length}</h2> */}
-            <h2 className="text-center text-2xl font-bold my-5">My Food Request:</h2>
+            <h2 className="text-center text-2xl font-bold my-5">{myFoodRequest && myFoodRequest.length > 0 ? `My Food Request: ${myFoodRequest.length}` : 'Length of Data: 0'}</h2>
 
             <div className="overflow-x-auto my-10">
                 <table className="table">
@@ -116,7 +101,7 @@ const FoodRequest = () => {
                     </thead>
                     <tbody>
                         {
-                            myFoodRequest && myFoodRequest?.map((oneFood, index, refetch={refetch}) => <tr key={index} >
+                            myFoodRequest && myFoodRequest?.map((oneFood, index) => <tr key={index} >
                                 <td>{index+1}</td>
                                 <td >
                                     <div className="flex items-center gap-3">
@@ -150,7 +135,7 @@ const FoodRequest = () => {
                                     <p className="badge badge-accent py-2 ">{oneFood.delivery_status.toUpperCase()}</p>
                                 </td>
                                 <td >
-                                    <button onClick={() => handleCanclartion(oneFood,oneFood._id)} className="btn btn-info">Cancel Request</button>
+                                    <button disabled={oneFood.delivery_status==="Delivered"} onClick={() => handleCanclartion(oneFood,oneFood._id)} className="btn btn-info">Cancel Request</button>
                                 </td>
                             </tr>)
                         }
