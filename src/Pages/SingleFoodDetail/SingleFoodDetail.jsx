@@ -2,8 +2,7 @@ import { useLoaderData, useParams } from "react-router-dom";
 
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Auth/AuthProvider";
-import Swal from "sweetalert2";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import axios from "axios";
 
 
@@ -27,20 +26,6 @@ const SingleFoodDetail = () => {
     // console.log("condition: ",expire_date>today)
     console.log("today -> expire day: ", today, expire_date)
 
-    //unneccessary
-    const notify = () => {
-        console.log('clicked')
-        toast("request done", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
-    }
     const handleSubmitRequest = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -106,12 +91,6 @@ const SingleFoodDetail = () => {
         console.log("update food: ", updateFood);
 
         setClosingInfo(true);
-
-        // Swal.fire({
-        //     title: "Thank you!",
-        //     text: "Your Food request is successfully-->>",
-        //     icon: "success"
-        // });
     }
 
     const handleRequest =() =>{

@@ -1,7 +1,6 @@
 import { useContext } from "react";
-import { useLoaderData, useLocation, useNavigate, useNavigation, useParams } from "react-router-dom";
+import { useLoaderData, useLocation, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../Auth/AuthProvider";
-import axios from "axios";
 import Swal from "sweetalert2";
 
 const UpdateFood = () => {
@@ -34,11 +33,6 @@ const UpdateFood = () => {
         const updateFood = { food_img, food_name, food_status, donator_name, donator_email, donator_photo, food_quantity, pickup_location, expire_date, notes }
 
         console.log("updated Food : ", updateFood);
-
-        // now send data to server
-        // axios.put(`http://localhost:5000/availableFoods/${_id}`)
-        // .then(res => console.log(res))
-        // .catch(error => console.log(error))
 
         fetch(`http://localhost:5000/availableFoods/${_id}`, {
             method: "PUT",

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import SingleFoodCard from "../../Pages/AvailableFood/SingleFoodCard";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 
 const FeaturedFood = () => {
     const [availableFoods, setAvailableFoods] = useState([]);
