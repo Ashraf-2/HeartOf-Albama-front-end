@@ -17,7 +17,7 @@ const ManageFood = () => {
 
     const handleDelete = (id) => {
         console.log(id);
-        axios.delete(`http://localhost:5000/availableFoods/${id}`)
+        axios.delete(`https://food-campagin-server.vercel.app/availableFoods/${id}`)
             .then(res => {
                 if (res.data.deletedCount > 0) {
                     console.log("successfully deleted")

@@ -38,7 +38,7 @@ const ManageFoodwithReq = () => {
         };
 
         console.log("updated food: ", updatedFood);
-        axios.put(`http://localhost:5000/foodRequest/${_id}`, updatedFood)
+        axios.put(`https://food-campagin-server.vercel.app/foodRequest/${_id}`, updatedFood)
             .then(res => {
                 console.log("update req sent to server")
                 setDelivery(true);
@@ -60,7 +60,7 @@ const ManageFoodwithReq = () => {
         }
 
         //2.update available food collection
-        axios.put(`http://localhost:5000/availableFoods/${refId}`, {
+        axios.put(`https://food-campagin-server.vercel.app/availableFoods/${refId}`, {
             food_img,
             food_name,
             food_status: "Unavailable",

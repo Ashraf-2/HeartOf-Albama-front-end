@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 const Qoutations = () => {
     const [qoutes, setQoutes] = useState([]);
     useEffect(() => {
-        fetch('/public/qoutations.json')
+        fetch('qoutations.json')
             .then(res => res.json())
             .then(data => setQoutes(data))
     }, [])
@@ -21,7 +21,7 @@ const Qoutations = () => {
         slidesToScroll: 2,
         initialSlide: 2,
         autoplay: true,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 4000,
 
 
       };

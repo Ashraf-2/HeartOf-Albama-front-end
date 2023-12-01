@@ -54,12 +54,12 @@ const FoodRequest = () => {
             delivery_status: "available"
         }
         console.log('update food: ', updateFood);
-        axios.put(`http://localhost:5000/availableFoods/${refId}`, updateFood)
+        axios.put(`https://food-campagin-server.vercel.app/availableFoods/${refId}`, updateFood)
         .then(res => console.log(res))
         .catch(error => console.log(error))
 
         //delete this food from the foodRequest collections
-        axios.delete(`http://localhost:5000/foodRequest/${id}`)
+        axios.delete(`https://food-campagin-server.vercel.app/foodRequest/${id}`)
         .then(res => {
             console.log(res.data)
             refetch();

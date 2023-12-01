@@ -46,7 +46,7 @@ const AvailableFood = () => {
                 }
             </div>
             {/* show every single food in card-wise */}
-            <div >
+            <div>
                 {
                     results.length > 0 ?
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 my-5" >

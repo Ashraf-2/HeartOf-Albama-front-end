@@ -27,7 +27,7 @@ const AddFood = () => {
         console.log("newFood: ", newFood);
 
         //post data to server using axios 
-        axios.post('http://localhost:5000/availableFoods',{
+        axios.post('https://food-campagin-server.vercel.app/availableFoods',{
             food_img,
             food_name,
             food_status,

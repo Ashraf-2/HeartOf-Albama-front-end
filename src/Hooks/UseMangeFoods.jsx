@@ -6,7 +6,7 @@ const UseMangeFoods = () => {
         queryKey: ["uks"],
         queryFn: async () => {
             try {
-                const response = await fetch('http://localhost:5000/availableFoods');
+                const response = await fetch('https://food-campagin-server.vercel.app/availableFoods');
           
                 if (!response.ok) {
                   throw new Error(`Failed to fetch data: ${response.statusText}`);

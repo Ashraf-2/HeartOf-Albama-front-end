@@ -39,24 +39,24 @@ const router = createBrowserRouter([
       {
         path: "/manageFoods",
         element: <PrivateRoutes><ManageFood></ManageFood></PrivateRoutes>,
-        loader: () => fetch("http://localhost:5000/availableFoods")
+        loader: () => fetch("https://food-campagin-server.vercel.app/availableFoods")
 
       },
       {
         path: "/manageFoods/:id",
         element: <ManageFoodwithReq></ManageFoodwithReq>,
-        loader: ({ params }) => fetch(`http://localhost:5000/foodRequest/${params.id}`)
+        loader: ({ params }) => fetch(`https://food-campagin-server.vercel.app/foodRequest/${params.id}`)
 
       },
       {
         path: "/availabeFood",
         element: <AvailableFood></AvailableFood>,
-        loader: () => fetch("http://localhost:5000/availableFoods")
+        loader: () => fetch("https://food-campagin-server.vercel.app/availableFoods")
       },
       {
         path: "/foodRequest",
         element: <PrivateRoutes><FoodRequest></FoodRequest></PrivateRoutes>,
-        loader: () => fetch("http://localhost:5000/foodRequest")
+        loader: () => fetch("https://food-campagin-server.vercel.app/foodRequest")
       },
       {
         path: "/login",
@@ -70,12 +70,12 @@ const router = createBrowserRouter([
       {
         path: "/foodDetail/:id",
         element: <PrivateRoutes><SingleFoodDetail></SingleFoodDetail></PrivateRoutes>,
-        loader: ({ params }) => fetch(`http://localhost:5000/availableFoods/${params.id}`)
+        loader: ({ params }) => fetch(`https://food-campagin-server.vercel.app/availableFoods/${params.id}`)
       },
       {
         path: "/updateFood/:id",
         element: <PrivateRoutes><UpdateFood></UpdateFood></PrivateRoutes>,
-        loader: ({ params }) => fetch(`http://localhost:5000/availableFoods/${params.id}`)
+        loader: ({ params }) => fetch(`https://food-campagin-server.vercel.app/availableFoods/${params.id}`)
       },
       
     ]

@@ -58,7 +58,7 @@ const SingleFoodDetail = () => {
             requester_photo
 
         }
-        axios.post('http://localhost:5000/foodRequest', newFoodRequest)
+        axios.post('https://food-campagin-server.vercel.app/foodRequest', newFoodRequest)
             .then(res => {
                 console.log('your food request sent to server');
             })
@@ -81,7 +81,7 @@ const SingleFoodDetail = () => {
         }
 
         // update food delivery status
-        axios.put(`http://localhost:5000/availableFoods/${_id}`, updateFood)
+        axios.put(`https://food-campagin-server.vercel.app/availableFoods/${_id}`, updateFood)
             .then(res => {
                 console.log('successfully send the update request')
             })
