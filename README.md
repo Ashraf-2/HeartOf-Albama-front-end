@@ -19,4 +19,4 @@ Currently, two official plugins are available:
 8. search food and sort food according to expire date is available at the available food page.
 
 # Live link:
-project live link: 
+project live link: https://a11-food-campagin-auth.web.app/
