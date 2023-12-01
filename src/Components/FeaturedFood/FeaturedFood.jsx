@@ -15,7 +15,7 @@ const FeaturedFood = () => {
     const availableFoodSorted = availableFoods.sort((a, b) => b.food_quantity - a.food_quantity);
     
     return (
-        <div className="w-10/12 mx-auto">
+        <div className="w-11/12 mx-auto">
             <h2 className="text-center font-bold text-5xl  my-5">Featured Food</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2"  data-aos="fade-up"  data-aos-offset="300" data-aos-easing="ease-in-sine" data-aos-duration="1000">
                 {
