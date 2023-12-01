@@ -17,7 +17,7 @@ const FeaturedFood = () => {
     return (
         <div >
             <h2 className="text-center font-bold text-5xl  my-5">Featured Food</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2"  data-aos="fade-up"  data-aos-offset="300" data-aos-easing="ease-in-sine" data-aos-duration="1000">
                 {
                     availableFoodSorted.slice(0, 6).map((food,index) => <SingleFoodCard index={index} key={food._id} food={food}></SingleFoodCard>)
                 }

@@ -49,7 +49,7 @@ const AvailableFood = () => {
             <div >
                 {
                     results.length > 0 ?
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 my-5">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 my-5" >
                             {
                                 sortByExpireDate ?
                                 resultsByExpireDate.map(food => <SingleFoodCard key={food._id} food={food}></SingleFoodCard>)

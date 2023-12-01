@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTo_R_vlnUz9UhylMPCccagw4dMqhbs4UMPAA&usqp=CAU",
+        "personName": "John Doe",
+        "quotation": "No one has ever become poor by giving."
+    },
+    {
+        "id": 2,
+        "image": "https://i.pinimg.com/736x/2a/26/df/2a26df12b8fab576a93f244212cb6673.jpg",
+        "personName": "Jane Smith",
+        "quotation": "The greatness of a nation can be judged by how it treats its weakest members."
+    },
+    {
+        "id": 3,
+        "image": "https://c8.alamy.com/comp/2J2AGP7/hippocrates-line-art-illustration-vector-2J2AGP7.jpg",
+        "personName": "Hippocrates",
+        "quotation": "Let food be thy medicine and medicine be thy food."
+    },
+    {
+        "id": 4,
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2WfSaBmfrFWzaVP01dhjbIaziee5V8_iIub4dhwzPNNmLSD29PnHBHt2ql5dj1yvG_Kg&usqp=CAU",
+        "personName": "Emily Brown",
+        "quotation": "Alone, we can do so little; together, we can do so much."
+    },
+    {
+        "id": 5,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/George_Charles_Beresford_-_Virginia_Woolf_in_1902_-_Restoration.jpg/351px-George_Charles_Beresford_-_Virginia_Woolf_in_1902_-_Restoration.jpg",
+        "personName": "Virginia Woolf",
+        "quotation": "One cannot think well, love well, sleep well if one has not dined well."
+    },
+    {
+        "id": 6,
+        "image": "https://3.bp.blogspot.com/-jEBvHvt4UXc/Vh09tEWFoRI/AAAAAAAAAiE/yWj75pVkzkc/s400/Ha-Nui-Lee%20MBW.jpg",
+        "personName": "Julia Child",
+        "quotation": "The only time to eat diet food is while you're waiting for the steak to cook."
+    },
+    {
+        "id": 7,
+        "image": "https://i.pinimg.com/originals/24/aa/be/24aabe7ff3abe16bbf2bdbef6df5ab1b.jpg",
+        "personName": "Daniel Davis",
+        "quotation": "There are people in the world so hungry, that God cannot appear to them except in the form of bread."
+    },
+    {
+        "id": 8,
+        "image": "https://media.licdn.com/dms/image/C4E03AQEeL9zlo-LRFw/profile-displayphoto-shrink_800_800/0/1594912937996?e=2147483647&v=beta&t=AL4_N1NIABgh3cyY6S0VZ6FenmF9onLYNT3jo6DOvdw",
+        "personName": "Olivia Taylor",
+        "quotation": "If you can't feed a hundred people, then just feed one."
+    },
+    {
+        "id": 9,
+        "image": "https://media.licdn.com/dms/image/D4E03AQFD5cEbfok44g/profile-displayphoto-shrink_800_800/0/1685046026068?e=2147483647&v=beta&t=YWhntsEAOSa4qINuLUSu3BHOEPWNROIV-EACIa-iJBw",
+        "personName": "Ethan Wilson",
+        "quotation": "Hunger is not an issue of charity. It is an issue of justice."
+    },
+    {
+        "id": 10,
+        "image": "https://cdn.britannica.com/50/23350-050-A1469D3C/George-Bernard-Shaw-country-home-Ayot-St-1946.jpg",
+        "personName": "George Bernard Shaw",
+        "quotation": "There is no love sincerer than the love of food."
+    }
+]
