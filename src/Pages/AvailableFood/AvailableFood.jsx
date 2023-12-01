@@ -24,7 +24,7 @@ const AvailableFood = () => {
 
 
     return (
-        <div>
+        <div className="w-11/12 mx-auto">
             <h2 className="text-4xl text-center font-bold">Available Food: 
             {
                 sortByExpireDate?
